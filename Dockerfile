@@ -34,8 +34,8 @@ RUN apt-get update && apt-get install -yq \
 		git \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# 0.16.3
-ENV BITCOIN_VERSION 49e34e288005a5b144a642e197b628396f5a0765
+# 0.17.0
+ENV BITCOIN_VERSION e1ed37edaedc85b8c3468bd9a726046344036243
 RUN cd /opt && \
 	git clone https://github.com/bitcoin/bitcoin.git && \
 	cd bitcoin/ && \
