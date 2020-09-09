@@ -39,7 +39,7 @@ ENV BITCOIN_VERSION 7ff64311bee570874c4f0dfa18f518552188df08
 RUN cd /opt && \
 	git clone https://github.com/bitcoin/bitcoin.git && \
 	cd bitcoin/ && \
-	git checkout ${BITCOIN_VERSION} && \
+	git checkout "${BITCOIN_VERSION}^{commit}" && \
 	./autogen.sh && \
 	./configure  --disable-wallet --without-gui --without-miniupnpc --with-zmq --enable-zmq && \
 	make -s -j5 && \
