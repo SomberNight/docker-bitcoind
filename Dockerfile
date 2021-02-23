@@ -37,10 +37,10 @@ RUN apt-get update && apt-get install -yq \
 		gosu \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# 0.21.0
-ENV BITCOIN_VERSION 95ea54ba089610019a74c1176a2c7c0dba144b1c
+# 0.21.1 + "every tx opts in to RBF"
+ENV BITCOIN_VERSION 70f9152d04ce737797bfc169d8d54a36baf23fe6
 RUN cd /opt && \
-	git clone https://github.com/bitcoin/bitcoin.git && \
+	git clone https://github.com/SomberNight/bitcoin.git && \
 	cd bitcoin/ && \
 	git checkout "${BITCOIN_VERSION}^{commit}" && \
 	./autogen.sh && \
