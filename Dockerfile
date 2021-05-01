@@ -37,8 +37,8 @@ RUN apt-get update && apt-get install -yq \
 		gosu \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# 0.21.0
-ENV BITCOIN_VERSION 95ea54ba089610019a74c1176a2c7c0dba144b1c
+# 0.21.1
+ENV BITCOIN_VERSION 194b9b8792d9b0798fdb570b79fa51f1d1f5ebaf
 RUN cd /opt && \
 	git clone https://github.com/bitcoin/bitcoin.git && \
 	cd bitcoin/ && \
