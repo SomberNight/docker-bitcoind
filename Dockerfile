@@ -35,7 +35,12 @@ RUN apt-get update && apt-get install -yq \
 		libzmq3-dev \
 		git \
 		gosu \
+		tor \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN echo "ControlPort 9051" >> /etc/tor/torrc && \
+	echo "CookieAuthentication 1" >> /etc/tor/torrc && \
+	echo "RunAsDaemon 1" >> /etc/tor/torrc
 
 # tag v24.0rc2
 ENV BITCOIN_VERSION 032ceb189acd93676a59963b0aba96ead1a7a201
