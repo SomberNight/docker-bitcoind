@@ -57,6 +57,7 @@ RUN cd /opt && \
 		--enable-zmq \
 		--disable-tests \
 		--disable-bench \
+		--disable-fuzz-binary \
 		&& \
 	make -s -j5 && \
 	make install
