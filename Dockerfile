@@ -44,7 +44,15 @@ RUN cd /opt && \
 	cd bitcoin/ && \
 	git checkout "${BITCOIN_VERSION}^{commit}" && \
 	./autogen.sh && \
-	./configure  --disable-wallet --without-gui --without-miniupnpc --with-zmq --enable-zmq --disable-tests && \
+	./configure  \
+		--disable-wallet \
+		--without-gui \
+		--without-miniupnpc \
+		--with-zmq \
+		--enable-zmq \
+		--disable-tests \
+		--disable-bench \
+		&& \
 	make -s -j5 && \
 	make install
 
