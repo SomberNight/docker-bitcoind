@@ -59,7 +59,7 @@ RUN cd /opt && \
 		--disable-bench \
 		--disable-fuzz-binary \
 		&& \
-	make -s -j5 && \
+	make -s "-j$(nproc)" && \
 	make install
 
 ADD ./bin /usr/local/bin
