@@ -18,22 +18,14 @@ RUN groupadd -g ${GROUP_ID} bitcoin \
 
 RUN apt-get update && apt-get install -yq \
 		build-essential \
-		libtool \
-		autotools-dev \
-		automake \
-		pkg-config \
-		libssl-dev \
-		libevent-dev \
-		bsdmainutils \
 		python3 \
-		libboost-system-dev \
-		libboost-filesystem-dev \
-		libboost-chrono-dev \
-		libboost-program-options-dev \
-		libboost-test-dev \
-		libboost-thread-dev \
-		libzmq3-dev \
 		git \
+		cmake \
+		pkgconf \
+		libevent-dev \
+		libboost-dev \
+		libsqlite3-dev \
+		libzmq3-dev \
 		gosu \
 		tor \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -42,25 +34,15 @@ RUN echo "ControlPort 9051" >> /etc/tor/torrc && \
 	echo "CookieAuthentication 1" >> /etc/tor/torrc && \
 	echo "RunAsDaemon 1" >> /etc/tor/torrc
 
-# tag v28.1
-ENV BITCOIN_VERSION 32efe850438ef22e2de39e562af557872a402c31
+# tag "v29.0"
+ENV BITCOIN_VERSION f490f5562d4b20857ef8d042c050763795fd43da
 RUN cd /opt && \
 	git clone https://github.com/bitcoin/bitcoin.git && \
 	cd bitcoin/ && \
 	git checkout "${BITCOIN_VERSION}^{commit}" && \
-	./autogen.sh && \
-	./configure  \
-		--disable-wallet \
-		--without-gui \
-		--without-miniupnpc \
-		--with-zmq \
-		--enable-zmq \
-		--disable-tests \
-		--disable-bench \
-		--disable-fuzz-binary \
-		&& \
-	make -s "-j$(nproc)" && \
-	make install
+	cmake -B build -DENABLE_WALLET=OFF -DBUILD_GUI=OFF -DWITH_ZMQ=ON -DBUILD_TESTS=OFF && \
+	cmake --build build "-j$(nproc)" && \
+	cmake --install build
 
 ADD ./bin /usr/local/bin
 
