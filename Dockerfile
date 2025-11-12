@@ -34,13 +34,19 @@ RUN echo "ControlPort 9051" >> /etc/tor/torrc && \
 	echo "CookieAuthentication 1" >> /etc/tor/torrc && \
 	echo "RunAsDaemon 1" >> /etc/tor/torrc
 
-# tag "v29.0"
-ENV BITCOIN_VERSION f490f5562d4b20857ef8d042c050763795fd43da
+# tag "v30.0"
+ENV BITCOIN_VERSION d0f6d9953a15d7c7111d46dcb76ab2bb18e5dee3
 RUN cd /opt && \
 	git clone https://github.com/bitcoin/bitcoin.git && \
 	cd bitcoin/ && \
 	git checkout "${BITCOIN_VERSION}^{commit}" && \
-	cmake -B build -DENABLE_WALLET=OFF -DBUILD_GUI=OFF -DWITH_ZMQ=ON -DBUILD_TESTS=OFF && \
+	cmake -B build \
+		-DENABLE_WALLET=OFF \
+		-DBUILD_GUI=OFF \
+		-DWITH_ZMQ=ON \
+		-DBUILD_TESTS=OFF \
+		-DENABLE_IPC=OFF \
+		&& \
 	cmake --build build "-j$(nproc)" && \
 	cmake --install build
 
