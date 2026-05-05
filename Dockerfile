@@ -34,8 +34,8 @@ RUN echo "ControlPort 9051" >> /etc/tor/torrc && \
 	echo "CookieAuthentication 1" >> /etc/tor/torrc && \
 	echo "RunAsDaemon 1" >> /etc/tor/torrc
 
-# tag "v30.0"
-ENV BITCOIN_VERSION d0f6d9953a15d7c7111d46dcb76ab2bb18e5dee3
+# tag "v31.0"
+ENV BITCOIN_VERSION 6574cb40869b96b9ffc79c19dc8f4e467d60f321
 RUN cd /opt && \
 	git clone https://github.com/bitcoin/bitcoin.git && \
 	cd bitcoin/ && \
